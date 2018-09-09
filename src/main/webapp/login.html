@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="static/vue/vue.js"></script>
+<script type="text/javascript" src="static/jquery.min.js"></script>
+</head>
+<body>
+
+Welcom to you
+
+<div id="app">
+	<input type="text" v-model="username"/>
+	
+	<input type="text" v-model="password" />
+	<input type="button" @click="summint">提交</input>
+</div>
+
+</body>
+
+<script type="text/javascript">
+var vm=new Vue({
+	el:"#app",
+	data:{
+		username:"",
+		password:"",
+	},
+	methods:{
+		summint(){
+			
+			console.log(vm.username);
+			var mydata="username="+vm.username+"&password="+vm.password;
+			
+			$.ajax({
+				type:"POST",
+				url:"/qcl/sys/login",
+				data:mydata,
+				dataType:"json",
+				success:function(response){
+					
+				}
+			});
+			
+			/* 
+			$.get("/qcl/sys/login/"+vm.username+"/"+vm.password,function(r){
+				console.log(JSON.stringify(r));
+			}) */
+			
+			
+		}
+	},
+	created:function(){
+		//this.sendMessage();
+	}
+	
+	
+});
+
+
+</script>
+</html>
